@@ -1,8 +1,1 @@
-notebooks/.env
-/.env
-__pycache__
-notebooks/Delphinium.zip
-notebooks/Delphinium/
-notebooks/Spider_Plant.zip
-notebooks/Spider_Plant/
-venv/
+.env
