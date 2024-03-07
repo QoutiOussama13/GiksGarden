@@ -5,6 +5,7 @@ from welcome_page import display_welcome_page
 from plant_page import display_plant_page
 from chatbot_page import display_chatbot_page
 from utils import * 
+
 st.set_page_config(
     page_title="GiksGarden is Here 🟩",
     page_icon="🟩")
