@@ -71,7 +71,7 @@ def encode_and_query_api(image, api_key):
 
     return response.json()['choices'][0]['message']['content']
 
-Delphinium = Chroma(persist_directory=".\Examples\Delphinium", embedding_function=embeddings)
+Delphinium = Chroma(persist_directory="./Examples/Delphinium", embedding_function=embeddings)
 # spider_plant = Chroma(persist_directory="C:\Users\pc\Desktop\Oasis hackathon\Examples\Spider_Plant", embedding_function=embeddings)
 
 cfg = Config()
