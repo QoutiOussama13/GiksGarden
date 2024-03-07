@@ -1,7 +1,7 @@
 import streamlit as st
 
 st.title("Spider Plant Chat")
-st.image('.\Images\SpiderPlant.jpg', caption='Spider Plant')
+st.image('./Images/SpiderPlant.jpg', caption='Spider Plant')
 
 
 # Initialize chat history
