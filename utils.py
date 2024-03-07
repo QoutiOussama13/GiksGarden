@@ -1,22 +1,52 @@
+
 import streamlit as st
+from langchain_openai import ChatOpenAI
+from langchain.prompts.chat import (
+    ChatPromptTemplate,
+    SystemMessagePromptTemplate,
+    HumanMessagePromptTemplate,
+)
+import os 
+from dotenv import load_dotenv
+
+load_dotenv()
+
+api_key = os.environ["OPENAI_API_KEY"]
+model = 'gpt-3.5-turbo'
+llm = ChatOpenAI(temperature=0, model=model)
+sys_template = "Pretend you're a proficient horticulturist capable of analyzing the condition of a plant, identifying its species, and outlining the necessary steps for optimal growth"
+
+def general_llm(input_user, llm):
+
+    prompt = ChatPromptTemplate.from_messages([
+        ("system", sys_template),
+        ("user", "{input}")
+    ])
+    chain = prompt | llm
+    return chain.invoke({"input": input_user})
+
+
 def display_chatbot(page_title, chat_prefix=""):
     st.title(page_title)
-    # Initialize chat history for each chatbot page separately
-    if f"messages_{chat_prefix}" not in st.session_state:
-        st.session_state[f"messages_{chat_prefix}"] = []
-    # Display chat messages from history on app rerun
-    for message in st.session_state[f"messages_{chat_prefix}"]:
+    #client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+
+    if "general_text_model" not in st.session_state:
+        st.session_state["general_text_model"] = llm
+
+
+    if "messages" not in st.session_state:
+        st.session_state.messages = []
+
+    for message in st.session_state.messages:
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
-    # React to user input
+
     if prompt := st.chat_input("What is up?"):
-        # Display user message in chat message container
-        st.chat_message("user").markdown(prompt)
-        # Add user message to chat history
-        st.session_state[f"messages_{chat_prefix}"].append({"role": "user", "content": prompt})
-        response = f"Echo: {prompt}"
-        # Display assistant response in chat message container
+        st.session_state.messages.append({"role": "user", "content": prompt})
+        with st.chat_message("user"):
+            st.markdown(prompt)
+
         with st.chat_message("assistant"):
-            st.markdown(response)
-        # Add assistant response to chat history
-        st.session_state[f"messages_{chat_prefix}"].append({"role": "assistant", "content": response})
+            response=general_llm(prompt,st.session_state["general_text_model"])
+            print(response)
+        st.session_state.messages.append({"role": "assistant", "content": response})
