@@ -5,7 +5,7 @@ from PIL import Image
 from utils import *
 
 st.title("Delphinium Chatbot")
-st.image('.\Images\Delphinium.png', caption='Delphinium ')
+st.image('./Images/Delphinium.png', caption='Delphinium ')
 
 agent_executor = setup_agent()
 os.environ['OPENAI_API_KEY'] = st.secrets['OPENAI_API_KEY']
