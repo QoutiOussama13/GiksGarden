@@ -5,14 +5,12 @@ from welcome_page import display_welcome_page
 from plant_page import display_plant_page
 from chatbot_page import display_chatbot_page
 
-st.set_page_config(
-    page_title="GiksGarden is Here 🟩",
-    page_icon="🟩")
+st.set_page_config(page_title="GiksGarden is Here 🟩", page_icon="🟩")
 
 # Check if a plant has been added
-if 'plant_added' not in st.session_state:
+if "plant_added" not in st.session_state:
     st.session_state.plant_added = False
-if 'plant_name' not in st.session_state:
+if "plant_name" not in st.session_state:
     st.session_state.plant_name = ""
 
 # Sidebar Navigation
@@ -33,7 +31,10 @@ if not st.session_state.plant_added:
         display_plant_page()
 else:
     if st.sidebar.button(f"{st.session_state.plant_name} Chat"):
-        display_chatbot_page(f"Chat for {st.session_state.plant_name}", chat_prefix=st.session_state.plant_name.replace(" ", "_"))
+        display_chatbot_page(
+            f"Chat for {st.session_state.plant_name}",
+            chat_prefix=st.session_state.plant_name.replace(" ", "_"),
+        )
 
 if st.sidebar.button("Example Chat 1"):
     st.session_state.plant_added = False

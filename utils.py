@@ -1,4 +1,3 @@
-
 import streamlit as st
 from langchain_openai import ChatOpenAI
 from langchain.prompts.chat import (
@@ -6,7 +5,7 @@ from langchain.prompts.chat import (
     SystemMessagePromptTemplate,
     HumanMessagePromptTemplate,
 )
-import os, time 
+import os, time
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -16,21 +15,22 @@ llm = ChatOpenAI(openai_api_key=api_key)
 
 sys_template = "Pretend you're a proficient horticulturist capable of analyzing the condition of a plant, identifying its species, and outlining the necessary steps for optimal growth"
 
-def general_llm(input_user, llm):
 
-    prompt = ChatPromptTemplate.from_messages([
-        ("system", sys_template),
-        ("user", "{input}")
-    ])
+def general_llm(input_user, llm):
+    prompt = ChatPromptTemplate.from_messages(
+        [("system", sys_template), ("user", "{input}")]
+    )
     chain = prompt | llm
     return chain.invoke({"input": input_user})
 
+
 def response_generator(prompt):
-    response=general_llm(prompt,llm)
+    response = general_llm(prompt, llm)
     print(response)
     for word in response.split():
         yield word + " "
         time.sleep(0.05)
+
 
 def display_chatbot(chat_prefix=""):
     if "messages" not in st.session_state:
@@ -47,7 +47,7 @@ def display_chatbot(chat_prefix=""):
 
         with st.chat_message("assistant"):
             response = st.write_stream(response_generator(prompt))
-            #st.markdown(response)
+            # st.markdown(response)
             print(response)
-        
+
         st.session_state.messages.append({"role": "assistant", "content": response})
