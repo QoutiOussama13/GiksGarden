@@ -1,6 +1,6 @@
 # 🌿 Giks Garden Navigation 🌱
 
-Giks Garden Navigation is a revolutionary mobile application designed to simplify gardening for enthusiasts of all skill levels. Whether you're a beginner seeking guidance or a seasoned gardener looking for inspiration, Giks Garden Navigation is your ultimate companion for cultivating thriving and beautiful gardens.
+Giks Garden Navigation is a revolutionary application designed to simplify gardening for enthusiasts of all skill levels. Whether you're a beginner seeking guidance or a seasoned gardener looking for inspiration, Giks Garden Navigation is your ultimate companion for cultivating thriving and beautiful gardens.
 
 ## Features
 
