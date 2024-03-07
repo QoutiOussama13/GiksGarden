@@ -4,7 +4,6 @@ import streamlit as st
 from welcome_page import display_welcome_page
 from plant_page import display_plant_page
 from chatbot_page import display_chatbot_page
-from utils import * 
 
 st.set_page_config(
     page_title="GiksGarden is Here 🟩",
@@ -24,7 +23,9 @@ if st.sidebar.button("Welcome"):
 
 if st.sidebar.button("General Chatbot"):
     st.session_state.plant_added = False
-    display_chatbot_page("General Chatbot")
+    st.session_state["page"] = "general"
+    if st.session_state["page"] == "general":
+        display_chatbot_page("General chatbot")
 
 # This button shows conditionally depending on the state of plant addition
 if not st.session_state.plant_added:
