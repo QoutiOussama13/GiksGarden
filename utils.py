@@ -46,7 +46,7 @@ def display_chatbot(chat_prefix=""):
         st.session_state.messages.append({"role": "user", "content": prompt})
 
         with st.chat_message("assistant"):
-            response = st.write_stream(response_generator())
+            response = st.write_stream(response_generator(prompt))
             #st.markdown(response)
             print(response)
         
